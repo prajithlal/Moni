@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Moni</string>
+    <string name="action_settings">Settings</string>
+    <string name="btnEng">ENGLISH ALPHABETS</string>
+    <string name="btnMal">MALAYALAM ALPHABETS</string>
+    <string name="title_activity_eng">EngActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_eng_acticity">EngActicity</string>
+
+</resources>
