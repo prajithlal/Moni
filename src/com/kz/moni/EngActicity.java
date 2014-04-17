@@ -1,21 +1,20 @@
 package com.kz.moni;
 
-import com.kz.moni.util.SystemUiHider;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.os.Build;
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import com.kz.moni.util.SystemUiHider;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -31,7 +30,15 @@ public class EngActicity extends Activity {
 	private int  mCount;
 	private GestureDetector mGestureDetector;
 	private String[] engAlph = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-	private final static String TAG = "Main";
+	private final static String TAG = "EngActivity";
+	
+	private AudioManager mAudioMgr;
+	private SoundPool mSoundPool;
+	private int mSoundID;
+	// Audio volume
+	private float mStreamVolume;
+	Context mContext;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,7 +51,6 @@ public class EngActicity extends Activity {
 		mTextView1 = (TextView) findViewById(R.id.textView1);
 		mTextView2 = (TextView) findViewById(R.id.textView2);
 
-//		mTextView1.setText(String.valueOf(mCount));
 		mTextView1.setText(engAlph[mCount]);
 
 		mGestureDetector = new GestureDetector(this,
@@ -54,19 +60,15 @@ public class EngActicity extends Activity {
 							float velocityX, float velocityY) {
 						if (velocityX < -10.0f) {
 							log("On right fling");
-							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1
-									: 0;
+							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1: 0;
 							switchLayoutStateTo(mCurrentLayoutState);
-							if (mCount < 25) {
-								mCount++;
-							}
+
 						} else {
 							log("On left fling");
 							if (mCount >0 ) {
 								mCount--;
 							}
-							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1
-									: 0;
+							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1	: 0;
 							switchLayoutStateTo(mCurrentLayoutState);
 						}
 						return true;
@@ -74,6 +76,38 @@ public class EngActicity extends Activity {
 				});
 	}
 
+	//Load soundpool on resume activity
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		mAudioMgr = (AudioManager) getSystemService(AUDIO_SERVICE);
+
+		mStreamVolume = (float) mAudioMgr.getStreamVolume(AudioManager.STREAM_MUSIC)
+				/ mAudioMgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+
+		mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+
+		mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+			
+			@Override
+			public void onLoadComplete(SoundPool soundPool, int sid, int status) {
+//				setupGestureDetector();
+				Log.i(getClass().getSimpleName(), "Sound is now loaded");
+				mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
+				
+			}
+		});
+
+//		log(" File name is " + engAlph[mCount].toLowerCase());
+		int myLtr = this.getResources().getIdentifier(engAlph[mCount].toLowerCase(), "raw", this.getPackageName());
+		
+//		log(myLtr + " File name is " + engAlph[mCount].toLowerCase());
+		mSoundID = mSoundPool.load(this,myLtr, 1);
+
+	}
+	
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		return mGestureDetector.onTouchEvent(event);
@@ -83,6 +117,11 @@ public class EngActicity extends Activity {
 	public void switchLayoutStateTo(int switchTo) {
 		mCurrentLayoutState = switchTo;
 
+		if (mCount < 25) {
+			mCount++;
+		} else {
+			mCount = 0;
+		}
 		mFlipper.setInAnimation(inFromRightAnimation());
 		mFlipper.setOutAnimation(outToLeftAnimation());
 
@@ -94,7 +133,15 @@ public class EngActicity extends Activity {
 			mTextView2.setText(engAlph[mCount]);
 		}
 
+		int myLtr = this.getResources().getIdentifier(engAlph[mCount].toLowerCase(), "raw", this.getPackageName());
+		
+		mSoundID = mSoundPool.load(this,myLtr, 1);
+		
+
+		
 		mFlipper.showPrevious();
+		
+	
 	}
 
 	private Animation inFromRightAnimation() {
