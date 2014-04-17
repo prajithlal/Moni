@@ -3,7 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -12,5 +16,21 @@
         android:gravity="center"
         android:textSize="400sp" >
     </TextView>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical" >
+	    
+<TextView  
+    android:id="@+id/txtLtr"
+    android:layout_marginTop="10dp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:text="Test11" 
+    android:drawableLeft="@drawable/ic_launcher" android:padding="5dp" />
+    </LinearLayout>
+    
 </LinearLayout>

@@ -1,7 +1,13 @@
 package com.kz.moni;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -11,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -38,6 +45,9 @@ public class EngActicity extends Activity {
 	// Audio volume
 	private float mStreamVolume;
 	Context mContext;
+	
+//	private ImageView imgLtr;
+	private TextView txtLtr;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,19 +102,32 @@ public class EngActicity extends Activity {
 			
 			@Override
 			public void onLoadComplete(SoundPool soundPool, int sid, int status) {
-//				setupGestureDetector();
 				Log.i(getClass().getSimpleName(), "Sound is now loaded");
 				mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
 				
 			}
 		});
 
-//		log(" File name is " + engAlph[mCount].toLowerCase());
 		int myLtr = this.getResources().getIdentifier(engAlph[mCount].toLowerCase(), "raw", this.getPackageName());
-		
-//		log(myLtr + " File name is " + engAlph[mCount].toLowerCase());
 		mSoundID = mSoundPool.load(this,myLtr, 1);
 
+		int myImg = this.getResources().getIdentifier("apple", "assets", this.getPackageName());
+		log("Imageview checking" + myImg);
+//		imgLtr= (ImageView)findViewById(R.id.imgLtr);  
+//		imgLtr.setImageResource(myImg);
+		txtLtr = (TextView) findViewById(R.id.txtLtr);
+		txtLtr.setCompoundDrawablesWithIntrinsicBounds(myImg,0,0,0);
+		log("Image loaded");
+		
+//		Bitmap bm;
+//		try {
+//			bm = getBitmapFromAsset("apple.png");
+//			txtLtr.setCompoundDrawablesWithIntrinsicBounds(bm, 0,0, 0);
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
 	
@@ -125,23 +148,17 @@ public class EngActicity extends Activity {
 		mFlipper.setInAnimation(inFromRightAnimation());
 		mFlipper.setOutAnimation(outToLeftAnimation());
 
-
-
 		if (switchTo == 0) {
 			mTextView1.setText(engAlph[mCount]);
 		} else {
 			mTextView2.setText(engAlph[mCount]);
 		}
 
-		int myLtr = this.getResources().getIdentifier(engAlph[mCount].toLowerCase(), "raw", this.getPackageName());
-		
+		int myLtr = this.getResources().getIdentifier(engAlph[mCount].toLowerCase(), "raw", this.getPackageName());	
 		mSoundID = mSoundPool.load(this,myLtr, 1);
-		
-
-		
+				
 		mFlipper.showPrevious();
-		
-	
+			
 	}
 
 	private Animation inFromRightAnimation() {
@@ -165,6 +182,14 @@ public class EngActicity extends Activity {
 		outtoLeft.setInterpolator(new LinearInterpolator());
 		return outtoLeft;
 	}
+	
+	private Bitmap getBitmapFromAsset(String strName) throws IOException
+	{
+	    AssetManager assetManager = getAssets();
+	    InputStream istr = assetManager.open(strName);
+	    Bitmap bitmap = BitmapFactory.decodeStream(istr);
+	    return bitmap;
+	 }
 	
 	private void log(String msg) {
 		try {
