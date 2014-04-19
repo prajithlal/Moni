@@ -30,7 +30,7 @@ public class MalActivity extends Activity {
 	private int  mCount;
 	private GestureDetector mGestureDetector;
 
-	private String[] malAlph = {"A", "B","C", "Cu", "D", "Du", "E", "F", "G", "sF", "H", "Hm", "Hu", "Aw", "A", 
+	private String[] malAlph = {"A", "B","C", "Cu", "D", "Du", "E", "F", "G", "sF", "H", "Hm", "Hu", "Aw", "Ax", 
 			"I", "J", "K", "L", "M",
 			"N", "O", "P", "Q", "R",
 			"S", "T", "U", "V", "W",

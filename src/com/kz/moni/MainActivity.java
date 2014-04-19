@@ -44,13 +44,13 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		Button btnSettings = (Button) findViewById(R.id.btnSettings);
-		btnSettings.setOnClickListener(new OnClickListener() {
+		Button btnNumber = (Button) findViewById(R.id.btnNumber);
+		btnNumber.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 //				Toast.makeText(getApplicationContext(), "Mal alphabets", Toast.LENGTH_SHORT).show();
-	            Intent intent = new Intent(cntxt, SettingsActivity.class);
+	            Intent intent = new Intent(cntxt, NumberActivity.class);
 	            startActivity(intent);
 			}
 		});
