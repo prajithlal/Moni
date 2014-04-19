@@ -28,6 +28,12 @@
             android:label="@string/title_activity_eng_acticity"
             android:theme="@style/FullscreenTheme" >
         </activity>
+        <activity
+            android:name="com.kz.moni.MalActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_mal"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
     </application>
 
 </manifest>

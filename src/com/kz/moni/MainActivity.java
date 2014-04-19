@@ -39,8 +39,9 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Mal alphabets", Toast.LENGTH_SHORT).show();
-				
+//				Toast.makeText(getApplicationContext(), "Mal alphabets", Toast.LENGTH_SHORT).show();
+	            Intent intent = new Intent(cntxt, MalActivity.class);
+	            startActivity(intent);
 			}
 		});
 

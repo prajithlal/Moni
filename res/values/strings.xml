@@ -10,5 +10,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_eng_acticity">EngActicity</string>
     <string name="txtLtr">Apple</string>
+    <string name="title_activity_mal">MalActivity</string>
 
 </resources>
