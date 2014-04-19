@@ -1,14 +1,13 @@
 package com.kz.moni;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -45,6 +44,16 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		Button btnSettings = (Button) findViewById(R.id.btnSettings);
+		btnSettings.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+//				Toast.makeText(getApplicationContext(), "Mal alphabets", Toast.LENGTH_SHORT).show();
+	            Intent intent = new Intent(cntxt, SettingsActivity.class);
+	            startActivity(intent);
+			}
+		});
 	}
 
 	@Override

@@ -11,5 +11,7 @@
     <string name="title_activity_eng_acticity">EngActicity</string>
     <string name="txtLtr">Apple</string>
     <string name="title_activity_mal">MalActivity</string>
+    
+    <string name="btn_settings">Settings</string>
 
 </resources>

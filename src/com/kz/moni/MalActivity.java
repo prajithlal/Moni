@@ -1,6 +1,7 @@
 package com.kz.moni;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -45,7 +46,7 @@ public class MalActivity extends Activity {
 
 		setContentView(R.layout.mal_activity);
 
-
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		mCurrentLayoutState = 0;
 
 		mFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
