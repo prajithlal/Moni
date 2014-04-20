@@ -26,6 +26,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class color {
         public static final int black_overlay=0x7f060000;
+        public static final int translucent_red=0x7f060001;
     }
     public static final class dimen {
         /** 
@@ -33,9 +34,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f070002;
+        public static final int activity_horizontal_margin=0x7f070004;
         public static final int eng_font_size=0x7f070000;
         public static final int mal_font_size=0x7f070001;
+        public static final int numL_font_size=0x7f070002;
+        public static final int numS_font_size=0x7f070003;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;

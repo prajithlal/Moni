@@ -26,10 +26,12 @@ public class NumberActivity extends Activity {
 
 	private ViewFlipper mFlipper;
 	private TextView mTextView1, mTextView2;
-	private int mCurrentLayoutState, mCount;
+	private int mCurrentLayoutState;
+	private int mCount=1;
+	private boolean isRight = false;
 	private GestureDetector mGestureDetector;
 	
-	private final static String TAG = "EngActivity";
+	private final static String TAG = "NumActivity";
 	
 	private AudioManager mAudioMgr;
 	private SoundPool mSoundPool;
@@ -58,9 +60,17 @@ public class NumberActivity extends Activity {
 					@Override
 					public boolean onFling(MotionEvent e1, MotionEvent e2,
 							float velocityX, float velocityY) {
+						log("On Num fling method");
 						if (velocityX < -10.0f) {
-							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1
-									: 0;
+							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1: 0;
+							switchLayoutStateTo(mCurrentLayoutState);
+						}
+						if (velocityX > +10.0f) {
+							isRight = true;
+							if (mCount >1 ) {
+								mCount--;
+							}
+							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1: 0;
 							switchLayoutStateTo(mCurrentLayoutState);
 						}
 						return true;
@@ -73,6 +83,15 @@ public class NumberActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 
+
+
+	}
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+
 		mAudioMgr = (AudioManager) getSystemService(AUDIO_SERVICE);
 
 		mStreamVolume = (float) mAudioMgr.getStreamVolume(AudioManager.STREAM_MUSIC)
@@ -84,13 +103,12 @@ public class NumberActivity extends Activity {
 			
 			@Override
 			public void onLoadComplete(SoundPool soundPool, int sid, int status) {
-				Log.i(getClass().getSimpleName(), "Sound is now loaded");
 				mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
 				
 			}
 		});
-
-		int myLtr = this.getResources().getIdentifier("a1", "raw", this.getPackageName());
+		
+		int myLtr = this.getResources().getIdentifier("a"+mCount, "raw", this.getPackageName());
 		mSoundID = mSoundPool.load(this,myLtr, 1);
 
 		
@@ -104,7 +122,6 @@ public class NumberActivity extends Activity {
 //			e.printStackTrace();
 //		}
 	}
-	
 @Override
 public boolean onTouchEvent(MotionEvent event) {
 	return mGestureDetector.onTouchEvent(event);
@@ -112,12 +129,36 @@ public boolean onTouchEvent(MotionEvent event) {
 
 public void switchLayoutStateTo(int switchTo) {
 	mCurrentLayoutState = switchTo;
+	
+	if (!isRight){
+		if (mCount<10){
+			mCount++;
+		}else {
+			mCount=1;
+		}
+	}
+	
+		if (isRight) {
 
-	mFlipper.setInAnimation(inFromRightAnimation());
-	mFlipper.setOutAnimation(outToLeftAnimation());
+			mFlipper.setInAnimation(inFromLefttAnimation());
+			mFlipper.setOutAnimation(outToRighttAnimation());
+			isRight=false;
+		} else {
+			mFlipper.setInAnimation(inFromRightAnimation());
+			mFlipper.setOutAnimation(outToLeftAnimation());
+		}
 
-	mCount++;
 
+
+	if(mCount==10){
+		float fontSize = getResources().getDimension(R.dimen.numL_font_size);
+		mTextView1.setTextSize(fontSize);
+		mTextView2.setTextSize(fontSize);
+	} else {
+		float fontSize = getResources().getDimension(R.dimen.numS_font_size);
+		mTextView1.setTextSize(fontSize);
+		mTextView2.setTextSize(fontSize);
+	}
 	if (switchTo == 0) {
 		mTextView1.setText(String.valueOf(mCount));
 	} else {
@@ -126,8 +167,9 @@ public void switchLayoutStateTo(int switchTo) {
 
 	int myLtr = this.getResources().getIdentifier("a"+mCount, "raw", this.getPackageName());	
 	mSoundID = mSoundPool.load(this,myLtr, 1);
-	
+
 	mFlipper.showPrevious();
+
 }
 private Animation inFromRightAnimation() {
 	Animation inFromRight = new TranslateAnimation(
@@ -149,5 +191,35 @@ private Animation outToLeftAnimation() {
 	outtoLeft.setDuration(500);
 	outtoLeft.setInterpolator(new LinearInterpolator());
 	return outtoLeft;
+}
+
+private Animation inFromLefttAnimation() {
+	Animation inFromLeft = new TranslateAnimation(
+			Animation.RELATIVE_TO_PARENT, -1.0f,
+			Animation.RELATIVE_TO_PARENT, 0.0f,
+			Animation.RELATIVE_TO_PARENT, 0.0f,
+			Animation.RELATIVE_TO_PARENT, 0.0f);
+	inFromLeft.setDuration(500);
+	inFromLeft.setInterpolator(new LinearInterpolator());
+	return inFromLeft;
+}
+
+private Animation outToRighttAnimation() {
+	Animation outtoRight = new TranslateAnimation(
+			Animation.RELATIVE_TO_PARENT, 0.0f,
+			Animation.RELATIVE_TO_PARENT, +1.0f,
+			Animation.RELATIVE_TO_PARENT, 0.0f,
+			Animation.RELATIVE_TO_PARENT, 0.0f);
+	outtoRight.setDuration(500);
+	outtoRight.setInterpolator(new LinearInterpolator());
+	return outtoRight;
+}
+private void log(String msg) {
+	try {
+		Thread.sleep(500);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	Log.i(TAG, msg);
 }
 }
