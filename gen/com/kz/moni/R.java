@@ -42,16 +42,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int sound=0x7f020001;
+        public static final int sound_on=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f0c0009;
-        public static final int btnEngActivity=0x7f0c0005;
-        public static final int btnMalActivity=0x7f0c0006;
-        public static final int btnNumber=0x7f0c0007;
+        public static final int action_settings=0x7f0c000b;
+        public static final int btnEngActivity=0x7f0c0006;
+        public static final int btnMalActivity=0x7f0c0007;
+        public static final int btnNumber=0x7f0c0008;
+        public static final int imgDora=0x7f0c0005;
+        public static final int imgSound=0x7f0c0009;
         public static final int include1=0x7f0c0002;
         public static final int include2=0x7f0c0001;
         public static final int textView1=0x7f0c0003;
-        public static final int textView2=0x7f0c0008;
+        public static final int textView2=0x7f0c000a;
         public static final int txtLtr=0x7f0c0004;
         public static final int view_flipper=0x7f0c0000;
     }
@@ -113,32 +117,33 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btn_number=0x7f08000a;
         public static final int dummy_button=0x7f080005;
         public static final int dummy_content=0x7f080006;
-        public static final int pref_color_random=0x7f08000e;
-        public static final int pref_default_display_name=0x7f080011;
-        public static final int pref_description_social_recommendations=0x7f08000f;
+        public static final int imgSound=0x7f08000c;
+        public static final int pref_color_random=0x7f08000f;
+        public static final int pref_default_display_name=0x7f080012;
+        public static final int pref_description_social_recommendations=0x7f080010;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f080013;
+        public static final int pref_header_data_sync=0x7f080014;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f080016;
+        public static final int pref_header_notifications=0x7f080017;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_mute=0x7f08000d;
-        public static final int pref_ringtone_silent=0x7f080019;
-        public static final int pref_title_add_friends_to_messages=0x7f080012;
-        public static final int pref_title_display_name=0x7f080010;
-        public static final int pref_title_new_message_notifications=0x7f080017;
-        public static final int pref_title_ringtone=0x7f080018;
-        public static final int pref_title_sync_frequency=0x7f080014;
-        public static final int pref_title_system_sync_settings=0x7f080015;
-        public static final int pref_title_vibrate=0x7f08001a;
+        public static final int pref_mute=0x7f08000e;
+        public static final int pref_ringtone_silent=0x7f08001a;
+        public static final int pref_title_add_friends_to_messages=0x7f080013;
+        public static final int pref_title_display_name=0x7f080011;
+        public static final int pref_title_new_message_notifications=0x7f080018;
+        public static final int pref_title_ringtone=0x7f080019;
+        public static final int pref_title_sync_frequency=0x7f080015;
+        public static final int pref_title_system_sync_settings=0x7f080016;
+        public static final int pref_title_vibrate=0x7f08001b;
         public static final int title_activity_eng=0x7f080004;
         public static final int title_activity_eng_acticity=0x7f080007;
         public static final int title_activity_mal=0x7f080009;
         public static final int title_activity_number=0x7f08000b;
-        public static final int title_activity_settings=0x7f08000c;
+        public static final int title_activity_settings=0x7f08000d;
         public static final int txtLtr=0x7f080008;
     }
     public static final class style {

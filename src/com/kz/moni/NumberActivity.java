@@ -97,6 +97,7 @@ public class NumberActivity extends Activity {
 		mStreamVolume = (float) mAudioMgr.getStreamVolume(AudioManager.STREAM_MUSIC)
 				/ mAudioMgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
+		log("Stream volume is "+mStreamVolume);
 		mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 
 		mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {

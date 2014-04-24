@@ -39,6 +39,7 @@ public class MalActivity extends Activity {
 			"b", "c", "d", "e", "f", "g", "h", "i", "j", "k","l"};
 	private final static String TAG = "MalActivity";
 
+	private boolean isRight = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,16 +69,22 @@ public class MalActivity extends Activity {
 					public boolean onFling(MotionEvent e1, MotionEvent e2,
 							float velocityX, float velocityY) {
 						if (velocityX < -10.0f) {
-							log("On right fling");
+							if (mCount < malAlph.length) {
+								mCount++;
+							} else {
+								mCount = 0;
+							}
 							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1: 0;
 							switchLayoutStateTo(mCurrentLayoutState);
 
-						} else {
-							log("On left fling");
-							if (mCount >0 ) {
+						} 
+						
+						if (velocityX > +10.0f) {
+							isRight = true;
+							if (mCount >1 ) {
 								mCount--;
 							}
-							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1	: 0;
+							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1: 0;
 							switchLayoutStateTo(mCurrentLayoutState);
 						}
 						return true;
@@ -95,13 +102,16 @@ public class MalActivity extends Activity {
 	public void switchLayoutStateTo(int switchTo) {
 		mCurrentLayoutState = switchTo;
 
-		if (mCount < malAlph.length) {
-			mCount++;
+		if (isRight) {
+
+			mFlipper.setInAnimation(inFromLefttAnimation());
+			mFlipper.setOutAnimation(outToRighttAnimation());
+			isRight=false;
 		} else {
-			mCount = 0;
+			mFlipper.setInAnimation(inFromRightAnimation());
+			mFlipper.setOutAnimation(outToLeftAnimation());
 		}
-		mFlipper.setInAnimation(inFromRightAnimation());
-		mFlipper.setOutAnimation(outToLeftAnimation());
+
 		
 		if (switchTo == 0) {
 			mTextView1.setText(malAlph[mCount]);
@@ -136,6 +146,28 @@ public class MalActivity extends Activity {
 		outtoLeft.setDuration(500);
 		outtoLeft.setInterpolator(new LinearInterpolator());
 		return outtoLeft;
+	}
+	
+	private Animation inFromLefttAnimation() {
+		Animation inFromLeft = new TranslateAnimation(
+				Animation.RELATIVE_TO_PARENT, -1.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f);
+		inFromLeft.setDuration(500);
+		inFromLeft.setInterpolator(new LinearInterpolator());
+		return inFromLeft;
+	}
+
+	private Animation outToRighttAnimation() {
+		Animation outtoRight = new TranslateAnimation(
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, +1.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f);
+		outtoRight.setDuration(500);
+		outtoRight.setInterpolator(new LinearInterpolator());
+		return outtoRight;
 	}
 
 	private void log(String msg) {

@@ -2,13 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A3DAEC"
     android:orientation="vertical" >
+    
 
-    <Button
-        android:id="@+id/btnEngActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnEng" />
+        <ImageView
+            android:id="@+id/imgDora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/btnEng"
+            android:maxHeight="42dp"
+            android:maxWidth="42dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_launcher" />
+
+        <Button
+            android:id="@+id/btnEngActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imgDora"
+            android:text="@string/btnEng" />
+    
     <Button
         android:id="@+id/btnMalActivity"
         android:layout_width="wrap_content"
@@ -21,4 +37,14 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_number" />
         
+     <ImageView
+        android:id="@+id/imgSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/imgSound"
+        android:scaleType="fitCenter"
+        android:clickable="true"
+        android:src="@drawable/sound_on" />
 </LinearLayout>

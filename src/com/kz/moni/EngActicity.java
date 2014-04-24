@@ -5,19 +5,20 @@ import java.io.InputStream;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -44,9 +45,11 @@ public class EngActicity extends Activity {
 	private int mSoundID;
 	// Audio volume
 	private float mStreamVolume;
-	Context mContext;
+	Context mContext = this;
 	
 //	private ImageView imgLtr;
+	private boolean isRight = false;
+	private boolean isMute = false;
 	private TextView txtLtr;
 	
 	@Override
@@ -55,6 +58,11 @@ public class EngActicity extends Activity {
 
 		setContentView(R.layout.eng_acticity);
 
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+       
+        isMute = pref.getBoolean("isMute", false);
+        log("Sound mute status is " + isMute);
+        
 		mCurrentLayoutState = 0;
 
 		mFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
@@ -69,32 +77,33 @@ public class EngActicity extends Activity {
 					public boolean onFling(MotionEvent e1, MotionEvent e2,
 							float velocityX, float velocityY) {
 						if (velocityX < -10.0f) {
-							log("On right fling");
 							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1: 0;
 							switchLayoutStateTo(mCurrentLayoutState);
 
-						} else {
-							log("On left fling");
-							if (mCount >0 ) {
+						} 
+						
+						if (velocityX > +10.0f) {
+							isRight = true;
+							if (mCount >1 ) {
 								mCount--;
 							}
-							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1	: 0;
+							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1: 0;
 							switchLayoutStateTo(mCurrentLayoutState);
 						}
+						
 						return true;
 					}
 				});
 	}
 
-	//Load soundpool on resume activity
 	@Override
-	protected void onResume() {
-		super.onResume();
+	protected void onStart() {
 
+		super.onStart();
 		mAudioMgr = (AudioManager) getSystemService(AUDIO_SERVICE);
 
-		mStreamVolume = (float) mAudioMgr.getStreamVolume(AudioManager.STREAM_MUSIC)
-				/ mAudioMgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+		mStreamVolume = (float) mAudioMgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+				/// mAudioMgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
 		mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 
@@ -103,7 +112,8 @@ public class EngActicity extends Activity {
 			@Override
 			public void onLoadComplete(SoundPool soundPool, int sid, int status) {
 				Log.i(getClass().getSimpleName(), "Sound is now loaded");
-				mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
+				if (!isMute)
+					mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
 				
 			}
 		});
@@ -128,8 +138,9 @@ public class EngActicity extends Activity {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+
+		
 	}
-	
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -140,13 +151,24 @@ public class EngActicity extends Activity {
 	public void switchLayoutStateTo(int switchTo) {
 		mCurrentLayoutState = switchTo;
 
-		if (mCount < 25) {
-			mCount++;
-		} else {
-			mCount = 0;
+		if (!isRight) {
+			if (mCount < 25) {
+				mCount++;
+			} else {
+				mCount = 0;
+			}
 		}
-		mFlipper.setInAnimation(inFromRightAnimation());
-		mFlipper.setOutAnimation(outToLeftAnimation());
+		
+		if (isRight) {
+
+			mFlipper.setInAnimation(inFromLefttAnimation());
+			mFlipper.setOutAnimation(outToRighttAnimation());
+			isRight=false;
+		} else {
+			mFlipper.setInAnimation(inFromRightAnimation());
+			mFlipper.setOutAnimation(outToLeftAnimation());
+		}
+
 
 		if (switchTo == 0) {
 			mTextView1.setText(engAlph[mCount]);
@@ -183,6 +205,27 @@ public class EngActicity extends Activity {
 		return outtoLeft;
 	}
 	
+	private Animation inFromLefttAnimation() {
+		Animation inFromLeft = new TranslateAnimation(
+				Animation.RELATIVE_TO_PARENT, -1.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f);
+		inFromLeft.setDuration(500);
+		inFromLeft.setInterpolator(new LinearInterpolator());
+		return inFromLeft;
+	}
+
+	private Animation outToRighttAnimation() {
+		Animation outtoRight = new TranslateAnimation(
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, +1.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f,
+				Animation.RELATIVE_TO_PARENT, 0.0f);
+		outtoRight.setDuration(500);
+		outtoRight.setInterpolator(new LinearInterpolator());
+		return outtoRight;
+	}
 	private Bitmap getBitmapFromAsset(String strName) throws IOException
 	{
 	    AssetManager assetManager = getAssets();

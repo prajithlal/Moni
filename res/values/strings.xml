@@ -13,5 +13,6 @@
     <string name="title_activity_mal">MalActivity</string>
     <string name="btn_number">Numbers</string>
     <string name="title_activity_number">NumberActivity</string>
+    <string name="imgSound">Sound image</string>
 
 </resources>
