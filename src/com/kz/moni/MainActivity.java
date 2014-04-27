@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 			
 			imgDra.getLayoutParams().height=d[1];
 			imgDra.getLayoutParams().width=d[0];
-			log("Height " + d[1] + "width " + d[0]);
+//			log("Height " + d[1] + "width " + d[0]);
 			Drawable dr = Drawable.createFromStream(getAssets().open("engImg/dora.png"), null);
 			log("Drawable ok");
 			imgDra.setImageDrawable(dr);
@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
 		
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		log("Height " + metrics.heightPixels + "width " + metrics.widthPixels);
+//		log("Height " + metrics.heightPixels + "width " + metrics.widthPixels);
 		
 		int [] d= new int[2];
 		d[0] = metrics.widthPixels/2; 
