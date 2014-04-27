@@ -5,46 +5,58 @@
     android:background="#A3DAEC"
     android:orientation="vertical" >
     
+    	<RelativeLayout
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content" >
 
-        <ImageView
-            android:id="@+id/imgDora"
+	     <ImageView
+            android:id="@+id/imgDra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/btnEng"
-            android:maxHeight="42dp"
-            android:maxWidth="42dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_launcher" />
-
-        <Button
-            android:id="@+id/btnEngActivity"
+	    <ImageView
+            android:id="@+id/imgSnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/imgDora"
+            android:layout_marginLeft="30dp"
+            android:adjustViewBounds="true"
+            android:layout_gravity="right"
+            android:clickable="true"
+            android:contentDescription="@string/imgSound"
+            android:layout_toRightOf="@id/imgDra"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sound_on" />
+	    
+	    
+	   <Button
+            android:id="@+id/btnEngActy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imgDra"
+            android:layout_below="@id/imgSnd"
             android:text="@string/btnEng" />
-    
-    <Button
-        android:id="@+id/btnMalActivity"
+	   
+	       <Button
+        android:id="@+id/btnMalActy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imgDra"
+        android:layout_below="@id/btnEngActy"
         android:text="@string/btnMal" />
 
         <Button
-        android:id="@+id/btnNumber"
+        android:id="@+id/btnNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imgDra"
+        android:layout_below="@id/btnMalActy"
         android:text="@string/btn_number" />
-        
-     <ImageView
-        android:id="@+id/imgSound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/imgSound"
-        android:scaleType="fitCenter"
-        android:clickable="true"
-        android:src="@drawable/sound_on" />
+</RelativeLayout>
+
+
+
 </LinearLayout>

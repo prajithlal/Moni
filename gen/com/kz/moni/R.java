@@ -47,11 +47,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class id {
         public static final int action_settings=0x7f0c000b;
-        public static final int btnEngActivity=0x7f0c0006;
-        public static final int btnMalActivity=0x7f0c0007;
-        public static final int btnNumber=0x7f0c0008;
-        public static final int imgDora=0x7f0c0005;
-        public static final int imgSound=0x7f0c0009;
+        public static final int btnEngActy=0x7f0c0007;
+        public static final int btnMalActy=0x7f0c0008;
+        public static final int btnNum=0x7f0c0009;
+        public static final int imgDra=0x7f0c0005;
+        public static final int imgSnd=0x7f0c0006;
         public static final int include1=0x7f0c0002;
         public static final int include2=0x7f0c0001;
         public static final int textView1=0x7f0c0003;

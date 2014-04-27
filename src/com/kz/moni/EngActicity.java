@@ -84,7 +84,7 @@ public class EngActicity extends Activity {
 						
 						if (velocityX > +10.0f) {
 							isRight = true;
-							if (mCount >1 ) {
+							if (mCount >0 ) {
 								mCount--;
 							}
 							mCurrentLayoutState = mCurrentLayoutState == 0 ? 1: 0;
