@@ -8,53 +8,73 @@
     	<RelativeLayout
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content" >
-
-	     <ImageView
+    	
+    	
+    	<ImageView
             android:id="@+id/imgDra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
             android:adjustViewBounds="true"
+            android:paddingTop="50dp"
             android:contentDescription="@string/btnEng"
-            android:scaleType="fitCenter"
+            android:scaleType="fitStart"
             android:src="@drawable/ic_launcher" />
-	    <ImageView
+		<ImageView
             android:id="@+id/imgSnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:adjustViewBounds="true"
             android:layout_gravity="right"
+            android:adjustViewBounds="true"
+            android:layout_toRightOf="@id/imgDra"
+            android:paddingLeft="50dp"
             android:clickable="true"
             android:contentDescription="@string/imgSound"
-            android:layout_toRightOf="@id/imgDra"
             android:scaleType="fitCenter"
             android:src="@drawable/sound_on" />
+    	    	    
+
+
 	    
-	    
-	   <Button
-            android:id="@+id/btnEngActy"
+	    <ImageView
+            android:id="@+id/imgAbc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:paddingTop="30dp"
+            android:contentDescription="@string/btnEng"
             android:layout_toRightOf="@id/imgDra"
-            android:layout_below="@id/imgSnd"
-            android:text="@string/btnEng" />
+            android:paddingBottom="30dp"
+			android:layout_below="@id/imgSnd"
+            android:scaleType="fitCenter"
+            android:src="@drawable/abc" />
 	   
-	       <Button
-        android:id="@+id/btnMalActy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/imgDra"
-        android:layout_below="@id/btnEngActy"
-        android:text="@string/btnMal" />
-
-        <Button
-        android:id="@+id/btnNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/imgDra"
-        android:layout_below="@id/btnMalActy"
-        android:text="@string/btn_number" />
+	    <ImageView
+            android:id="@+id/imgMal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:contentDescription="@string/btnMal"
+            android:layout_toRightOf="@id/imgDra"
+            android:layout_below="@id/imgAbc"
+			android:paddingBottom="30dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mal" />
+	    
+	    <ImageView
+            android:id="@+id/imgNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgMal"
+            android:layout_toRightOf="@id/imgDra"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:contentDescription="@string/btn_number"
+			android:paddingBottom="30dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/num" />
+	    	    
 </RelativeLayout>
 
 

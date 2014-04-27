@@ -2,6 +2,7 @@ package com.kz.moni;
 
 import java.io.IOException;
 
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
 
@@ -33,54 +35,45 @@ public class MainActivity extends Activity {
 		
 		try {
 
-			log("Loading dora");
 			imgDra = (ImageView) findViewById(R.id.imgDra);
-			imgDra.getLayoutParams().height=450;
-			imgDra.getLayoutParams().width=300;
-//			setImageOnDisplay();
+			int[] d = getScreenSize();
+			
+			imgDra.getLayoutParams().height=d[1];
+			imgDra.getLayoutParams().width=d[0];
+			log("Height " + d[1] + "width " + d[0]);
 			Drawable dr = Drawable.createFromStream(getAssets().open("engImg/dora.png"), null);
 			log("Drawable ok");
 			imgDra.setImageDrawable(dr);
-           log("Dora loaded");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-	
-		Button btnEngNew = (Button) findViewById(R.id.btnEngActy);
-		btnEngNew.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-//				Toast.makeText(getApplicationContext(), "English alphabets", Toast.LENGTH_SHORT).show();
+		ImageView imgAbc = (ImageView) findViewById(R.id.imgAbc);
+		imgAbc.setOnClickListener(new OnClickListener() {
+		    public void onClick(View v) {
+
 	            Intent intent = new Intent(cntxt, EngActicity.class);
 	            startActivity(intent);
-				
-			}
+		    }
 		});
-		
-		Button btnMalNew = (Button) findViewById(R.id.btnMalActy);
-		btnMalNew.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-//				Toast.makeText(getApplicationContext(), "Mal alphabets", Toast.LENGTH_SHORT).show();
+				
+		ImageView imgMal = (ImageView) findViewById(R.id.imgMal);
+		imgMal.setOnClickListener(new OnClickListener() {
+
+		    public void onClick(View v) {
 	            Intent intent = new Intent(cntxt, MalActivity.class);
 	            startActivity(intent);
-			}
+		    }
 		});
+		
+		ImageView imgNum = (ImageView) findViewById(R.id.imgNum);
+		imgNum.setOnClickListener(new OnClickListener() {
 
-		Button btnNumNew = (Button) findViewById(R.id.btnNum);
-		btnNumNew.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-//				Toast.makeText(getApplicationContext(), "Mal alphabets", Toast.LENGTH_SHORT).show();
-				log("test");
+		    public void onClick(View v) {
 	            Intent intent = new Intent(cntxt, NumberActivity.class);
 	            startActivity(intent);
-			}
+		    }
 		});
 
 		final ImageView imgSnd = (ImageView) findViewById(R.id.imgSnd);
@@ -115,16 +108,19 @@ public class MainActivity extends Activity {
 	}
 
 
-	private void setImageOnDisplay(){
+	private int[] getScreenSize(){
 		
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		log("Height " + metrics.heightPixels + "width " + metrics.widthPixels);
+		
+		int [] d= new int[2];
+		d[0] = metrics.widthPixels/2; 
+		d[1] = metrics.heightPixels;
 
-		int width = metrics.widthPixels/2+50;  
-		int height = metrics.heightPixels/2+100;
-		log("Height " + height + "width " + width);
-		LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
-		imgDra.setLayoutParams(parms);
+//		LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
+//		imgDra.setLayoutParams(parms);
+		return(d);
 	}
 	
 	
