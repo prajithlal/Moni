@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
@@ -121,12 +123,17 @@ public class EngActicity extends Activity {
 		int myLtr = this.getResources().getIdentifier(engAlph[mCount].toLowerCase(), "raw", this.getPackageName());
 		mSoundID = mSoundPool.load(this,myLtr, 1);
 
-		int myImg = this.getResources().getIdentifier("apple", "assets", this.getPackageName());
-		log("Imageview checking" + myImg);
+		try {
+			Drawable dr = Drawable.createFromStream(getAssets().open("engImg/apple.png"), null);
+
+		
+//		int myImg = this.getResources().getIdentifier("engImg/apple.png", "assets", this.getPackageName());
+//		log("Imageview checking" + myImg);
 //		imgLtr= (ImageView)findViewById(R.id.imgLtr);  
 //		imgLtr.setImageResource(myImg);
 		txtLtr = (TextView) findViewById(R.id.txtLtr);
-		txtLtr.setCompoundDrawablesWithIntrinsicBounds(myImg,0,0,0);
+		txtLtr.setCompoundDrawablesWithIntrinsicBounds(dr,null,null,null);
+		txtLtr.setVisibility(View.GONE);
 		log("Image loaded");
 		
 //		Bitmap bm;
@@ -139,6 +146,10 @@ public class EngActicity extends Activity {
 //			e.printStackTrace();
 //		}
 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

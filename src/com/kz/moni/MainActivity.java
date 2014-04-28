@@ -33,6 +33,10 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(cntxt);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("isMute", false);
+        
 		try {
 
 			imgDra = (ImageView) findViewById(R.id.imgDra);

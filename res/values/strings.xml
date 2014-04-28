@@ -14,5 +14,33 @@
     <string name="btn_number">Numbers</string>
     <string name="title_activity_number">NumberActivity</string>
     <string name="imgSound">Sound image</string>
+    
+    <string-array name="alphabet_array">
+        <item>APPLE</item>
+        <item>BALL</item>
+        <item>CAT</item>
+        <item>DOG</item>
+                <item>EYE</item>
+        <item>FAN</item>
+        <item>GUN</item>
+        <item>ICE</item>
+                <item>JEEP</item>
+        <item>KING</item>
+        <item>LION</item>
+        <item>MANGO</item>
+                <item>NEST</item>
+        <item>ORANGE</item>
+        <item>PPP</item>
+        <item>QUEUE</item>
+                <item>ROSE</item>
+        <item>SSS</item>
+        <item>TRAIN</item>
+        <item>UMBRELLA</item>
+                <item>VIOLIN</item>
+        <item>WATCH</item>
+        <item>X-MAS</item>
+        <item>YELLOW</item>
+                <item>ZEEBRA</item>
+    </string-array>
 
 </resources>

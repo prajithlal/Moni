@@ -48,7 +48,7 @@ public class MalActivity extends Activity {
 			"S", "T", "U", "V", "W",
 			"X", "Y", "Z", "[", "\\",
 			"]", "^", "_", "`", "a",
-			"b", "c",  "e","h", "i","j", "k","l","d", "f", "g" };
+			"b", "c",  "e","h", "i","j", "k","l","d", "f", "g", };
 	
 	private String[] malSound = {"a","aa","i","ee","u","oo","rr","e","ae","ai","o","oa","ow","um","ah",
 			"k","kh","g","gh","ng",
@@ -56,7 +56,7 @@ public class MalActivity extends Activity {
 			"t","tdh","d","dhv","tn",
 			"tv","th","dv","dh","n",
 			"p","ph","b","bh","m",
-			"y","r","l","w","sh","hsh","s","h","xr","mhl","zh"};
+			"y","r","l","w","sh","hsh","s","h","xr","hl","zh1"};
 	private final static String TAG = "MalActivity";
 
 	private boolean isRight = false;
@@ -95,7 +95,7 @@ public class MalActivity extends Activity {
 					public boolean onFling(MotionEvent e1, MotionEvent e2,
 							float velocityX, float velocityY) {
 						if (velocityX < -10.0f) {
-							if (mCount < malAlph.length) {
+							if (mCount < malAlph.length-1) {
 								mCount++;
 							} else {
 								mCount = 0;
