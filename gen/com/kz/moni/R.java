@@ -51,17 +51,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int sound_on=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f0c000b;
-        public static final int imgAbc=0x7f0c0007;
-        public static final int imgDra=0x7f0c0005;
-        public static final int imgMal=0x7f0c0008;
-        public static final int imgNum=0x7f0c0009;
-        public static final int imgSnd=0x7f0c0006;
+        public static final int action_settings=0x7f0c000a;
+        public static final int imgAbc=0x7f0c0006;
+        public static final int imgDra=0x7f0c0004;
+        public static final int imgMal=0x7f0c0007;
+        public static final int imgNum=0x7f0c0008;
+        public static final int imgSnd=0x7f0c0005;
         public static final int include1=0x7f0c0002;
         public static final int include2=0x7f0c0001;
-        public static final int itemImage=0x7f0c0004;
         public static final int textView1=0x7f0c0003;
-        public static final int textView2=0x7f0c000a;
+        public static final int textView2=0x7f0c0009;
         public static final int view_flipper=0x7f0c0000;
     }
     public static final class layout {
