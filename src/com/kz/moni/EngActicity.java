@@ -125,16 +125,16 @@ public class EngActicity extends Activity {
 
 		try {
 			Drawable dr = Drawable.createFromStream(getAssets().open("engImg/apple.png"), null);
+//			Drawable dr = Drawable.createFromStream(getAssets().open("engImg/apple.jpg"), null);
 
 		
 //		int myImg = this.getResources().getIdentifier("engImg/apple.png", "assets", this.getPackageName());
 //		log("Imageview checking" + myImg);
 //		imgLtr= (ImageView)findViewById(R.id.imgLtr);  
 //		imgLtr.setImageResource(myImg);
-		txtLtr = (TextView) findViewById(R.id.txtLtr);
-		txtLtr.setCompoundDrawablesWithIntrinsicBounds(dr,null,null,null);
-		txtLtr.setVisibility(View.GONE);
-		log("Image loaded");
+//		txtLtr = (TextView) findViewById(R.id.txtLtr);
+//		txtLtr.setCompoundDrawablesWithIntrinsicBounds(dr,dr,dr,dr);
+//		log("Image loaded");
 		
 //		Bitmap bm;
 //		try {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="eng_font_size">400sp</dimen>
+    <dimen name="eng_font_size">300sp</dimen>
     <dimen name="mal_font_size">150sp</dimen>
     <dimen name="numL_font_size">150sp</dimen>
     <dimen name="numS_font_size">200sp</dimen>

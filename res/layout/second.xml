@@ -18,19 +18,15 @@
     </TextView>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:orientation="vertical" >
-	    
-<TextView  
-    android:id="@+id/txtLtr"
-    android:layout_marginTop="10dp"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    android:visibility="invisible"
-    android:drawableLeft="@drawable/ic_launcher" android:padding="5dp" />
-    </LinearLayout>
+<LinearLayout
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  <ImageView android:id="@+id/itemImage"
+      	 android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"  android:src="@drawable/apple"
+            android:adjustViewBounds="true" android:gravity="center" android:padding="10px" />
+
+</LinearLayout>
     
 </LinearLayout>
