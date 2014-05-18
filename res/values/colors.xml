@@ -2,5 +2,12 @@
 
     <color name="black_overlay">#66000000</color>
     <color name="translucent_red">#80ff0000</color>
+    <color name="bg1">#A3007A</color>
+    <color name="bg2">#7A005C</color>
+    <color name="bg3">#660000</color>
+    <color name="bg4">#6666FF</color>
+    <color name="bg5">#FF5050</color>
+    <color name="bg6">#3D5200</color>
+    <color name="bg7">#944DDB</color>
 
 </resources>

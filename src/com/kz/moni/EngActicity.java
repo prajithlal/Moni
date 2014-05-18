@@ -2,6 +2,7 @@ package com.kz.moni;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -61,7 +63,7 @@ public class EngActicity extends Activity {
 		setContentView(R.layout.eng_acticity);
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
-       
+
         isMute = pref.getBoolean("isMute", false);
         log("Sound mute status is " + isMute);
         
@@ -161,7 +163,7 @@ public class EngActicity extends Activity {
 	
 	public void switchLayoutStateTo(int switchTo) {
 		mCurrentLayoutState = switchTo;
-
+        setActivityBackgroundColor();
 		if (!isRight) {
 			if (mCount < 25) {
 				mCount++;
@@ -244,6 +246,41 @@ public class EngActicity extends Activity {
 	    Bitmap bitmap = BitmapFactory.decodeStream(istr);
 	    return bitmap;
 	 }
+	
+	public void setActivityBackgroundColor() {
+
+		Random r = new Random();
+		int clr = r.nextInt(8 - 1) + 1;
+
+		View myV = this.getWindow().findViewById(R.id.view_flipper);
+		
+		switch(clr){
+		
+			case 1:
+				myV.setBackgroundColor(getResources().getColor(R.color.bg1));
+				break;
+			case 2:
+				myV.setBackgroundColor(getResources().getColor(R.color.bg2));
+				break;
+			case 3:
+				myV.setBackgroundColor(getResources().getColor(R.color.bg3));
+				break;
+			case 4:
+				myV.setBackgroundColor(getResources().getColor(R.color.bg4));
+				break;
+			case 5:
+				myV.setBackgroundColor(getResources().getColor(R.color.bg5));
+				break;
+			case 6:
+				myV.setBackgroundColor(getResources().getColor(R.color.bg6));
+				break;
+			case 7:
+				myV.setBackgroundColor(getResources().getColor(R.color.bg7));
+				break;
+
+		}
+
+	}
 	
 	private void log(String msg) {
 		try {
