@@ -6,16 +6,13 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -26,6 +23,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.kz.moni.MoniPreferences.MoniConstants;
 import com.kz.moni.util.SystemUiHider;
 
 /**
@@ -56,16 +54,16 @@ public class EngActicity extends Activity {
 	private boolean isMute = false;
 	private TextView txtLtr;
 	
+	private MoniPreferences mPref;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.eng_acticity);
 
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
-
-        isMute = pref.getBoolean("isMute", false);
-        log("Sound mute status is " + isMute);
+		mPref = new MoniPreferences();
+		isMute = mPref.getMoniPreference(mContext, MoniConstants.MUTE_FLAG);
         
 		mCurrentLayoutState = 0;
 
@@ -115,10 +113,10 @@ public class EngActicity extends Activity {
 			
 			@Override
 			public void onLoadComplete(SoundPool soundPool, int sid, int status) {
-				Log.i(getClass().getSimpleName(), "Sound is now loaded");
-				if (!isMute)
+
+				if (!isMute) {
 					mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
-				
+				}
 			}
 		});
 

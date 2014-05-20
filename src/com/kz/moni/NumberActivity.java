@@ -14,6 +14,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.kz.moni.MoniPreferences.MoniConstants;
 import com.kz.moni.util.SystemUiHider;
 
 /**
@@ -38,7 +39,10 @@ public class NumberActivity extends Activity {
 	private int mSoundID;
 	// Audio volume
 	private float mStreamVolume;
+	private boolean isMute = false;
+	
 	Context mContext;
+	private MoniPreferences mPref;
 	
 
 	@Override
@@ -47,6 +51,9 @@ public class NumberActivity extends Activity {
 
 		setContentView(R.layout.number_activity);
 
+		mPref = new MoniPreferences();
+		isMute = mPref.getMoniPreference(mContext, MoniConstants.MUTE_FLAG);
+		
 		mCurrentLayoutState = 0;
 
 		mFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
@@ -97,15 +104,16 @@ public class NumberActivity extends Activity {
 		mStreamVolume = (float) mAudioMgr.getStreamVolume(AudioManager.STREAM_MUSIC)
 				/ mAudioMgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
-		log("Stream volume is "+mStreamVolume);
 		mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 
 		mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
 			
 			@Override
 			public void onLoadComplete(SoundPool soundPool, int sid, int status) {
-				mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
 				
+				if (!isMute) {
+					mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
+				}
 			}
 		});
 		

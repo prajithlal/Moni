@@ -2,6 +2,8 @@ package com.kz.moni;
 
 import java.io.IOException;
 
+import com.kz.moni.MoniPreferences.MoniConstants;
+
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
@@ -24,7 +26,9 @@ public class MainActivity extends Activity {
 
 	private final static String TAG = "Main";
 
+
 	private ImageView imgDra;
+	private MoniPreferences mPref = new MoniPreferences();
 	
 	final Context cntxt = this;
 	@Override
@@ -32,11 +36,8 @@ public class MainActivity extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(cntxt);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean("isMute", false);
-        
+
+		mPref.setMoniPreference(cntxt, MoniConstants.MUTE_FLAG, false);
 		try {
 
 			imgDra = (ImageView) findViewById(R.id.imgDra);
@@ -46,7 +47,7 @@ public class MainActivity extends Activity {
 			imgDra.getLayoutParams().width=d[0];
 //			log("Height " + d[1] + "width " + d[0]);
 			Drawable dr = Drawable.createFromStream(getAssets().open("engImg/dora.png"), null);
-			log("Drawable ok");
+//			log("Drawable ok");
 			imgDra.setImageDrawable(dr);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -82,22 +83,23 @@ public class MainActivity extends Activity {
 
 		final ImageView imgSnd = (ImageView) findViewById(R.id.imgSnd);
 		imgSnd.setOnClickListener(new OnClickListener() {
-	        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(cntxt);
-	        SharedPreferences.Editor editor = pref.edit();
+//	        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(cntxt);
+//	        SharedPreferences.Editor editor = pref.edit();
 		    int mute = 0;
 
 		    public void onClick(View v) {
-		        log("img sound2 click");
 		        if (mute == 0) {
 		        	imgSnd.setImageResource(R.drawable.sound);
 		            mute = 1;
-		            editor.putBoolean("isMute", true);
+//		            editor.putBoolean("isMute", true);
+		            mPref.setMoniPreference(cntxt, MoniConstants.MUTE_FLAG, true);
 		        } else if (mute == 1) {
 		        	imgSnd.setImageResource(R.drawable.sound_on);
 		            mute = 0;
-		            editor.putBoolean("isMute", false);
+//		            editor.putBoolean("isMute", false);
+		            mPref.setMoniPreference(cntxt, MoniConstants.MUTE_FLAG, false);
 		        }
-		        editor.commit();
+//		        editor.commit();
 
 		    }
 		});
