@@ -3,6 +3,7 @@ package com.kz.moni;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 
 public class MoniPreferences {
@@ -18,6 +19,7 @@ public class MoniPreferences {
 	
 	public boolean getMoniPreference(Context mContext,String prefName) {
 		boolean val = false;
+
 		pref = PreferenceManager.getDefaultSharedPreferences(mContext);
 		val = pref.getBoolean(prefName, false);
 		

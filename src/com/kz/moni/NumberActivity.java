@@ -41,7 +41,7 @@ public class NumberActivity extends Activity {
 	private float mStreamVolume;
 	private boolean isMute = false;
 	
-	Context mContext;
+	Context mContext = this;
 	private MoniPreferences mPref;
 	
 
@@ -111,14 +111,16 @@ public class NumberActivity extends Activity {
 			@Override
 			public void onLoadComplete(SoundPool soundPool, int sid, int status) {
 				
-				if (!isMute) {
+				if (!isMute || mCount<11) {
 					mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
 				}
 			}
 		});
 		
-		int myLtr = this.getResources().getIdentifier("a"+mCount, "raw", this.getPackageName());
-		mSoundID = mSoundPool.load(this,myLtr, 1);
+		if(mCount<11){
+			int myLtr = this.getResources().getIdentifier("a"+mCount, "raw", this.getPackageName());
+			mSoundID = mSoundPool.load(this,myLtr, 1);
+		}
 
 		
 //		Bitmap bm;
@@ -140,7 +142,7 @@ public void switchLayoutStateTo(int switchTo) {
 	mCurrentLayoutState = switchTo;
 	
 	if (!isRight){
-		if (mCount<10){
+		if (mCount<51){
 			mCount++;
 		}else {
 			mCount=1;
@@ -158,24 +160,28 @@ public void switchLayoutStateTo(int switchTo) {
 		}
 
 
-
-	if(mCount==10){
-		float fontSize = getResources().getDimension(R.dimen.numL_font_size);
-		mTextView1.setTextSize(fontSize);
-		mTextView2.setTextSize(fontSize);
+	float fontSize;
+	if(mCount>=10){
+		fontSize = getResources().getDimension(R.dimen.numL_font_size);
+//		mTextView1.setTextSize(fontSize);
+//		mTextView2.setTextSize(fontSize);
 	} else {
-		float fontSize = getResources().getDimension(R.dimen.numS_font_size);
-		mTextView1.setTextSize(fontSize);
-		mTextView2.setTextSize(fontSize);
+		fontSize = getResources().getDimension(R.dimen.numS_font_size);
+//		mTextView1.setTextSize(fontSize);
+//		mTextView2.setTextSize(fontSize);
 	}
 	if (switchTo == 0) {
 		mTextView1.setText(String.valueOf(mCount));
+		mTextView1.setTextSize(fontSize);
 	} else {
 		mTextView2.setText(String.valueOf(mCount));
+		mTextView2.setTextSize(fontSize);
 	}
 
-	int myLtr = this.getResources().getIdentifier("a"+mCount, "raw", this.getPackageName());	
-	mSoundID = mSoundPool.load(this,myLtr, 1);
+	if (mCount<11){
+		int myLtr = this.getResources().getIdentifier("a"+mCount, "raw", this.getPackageName());	
+		mSoundID = mSoundPool.load(this,myLtr, 1);
+	}
 
 	mFlipper.showPrevious();
 
