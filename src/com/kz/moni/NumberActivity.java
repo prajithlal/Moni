@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
@@ -53,7 +54,7 @@ public class NumberActivity extends Activity {
 
 		mPref = new MoniPreferences();
 		isMute = mPref.getMoniPreference(mContext, MoniConstants.MUTE_FLAG);
-		
+		log("mute status" + isMute);
 		mCurrentLayoutState = 0;
 
 		mFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
@@ -111,7 +112,7 @@ public class NumberActivity extends Activity {
 			@Override
 			public void onLoadComplete(SoundPool soundPool, int sid, int status) {
 				
-				if (!isMute || mCount<11) {
+				if (!isMute && mCount<11) {
 					mSoundPool.play(mSoundID,mStreamVolume,mStreamVolume,1,0,1f);
 				}
 			}
@@ -140,7 +141,7 @@ public boolean onTouchEvent(MotionEvent event) {
 
 public void switchLayoutStateTo(int switchTo) {
 	mCurrentLayoutState = switchTo;
-	
+    setActivityBackgroundColor();
 	if (!isRight){
 		if (mCount<51){
 			mCount++;
@@ -163,12 +164,8 @@ public void switchLayoutStateTo(int switchTo) {
 	float fontSize;
 	if(mCount>=10){
 		fontSize = getResources().getDimension(R.dimen.numL_font_size);
-//		mTextView1.setTextSize(fontSize);
-//		mTextView2.setTextSize(fontSize);
 	} else {
 		fontSize = getResources().getDimension(R.dimen.numS_font_size);
-//		mTextView1.setTextSize(fontSize);
-//		mTextView2.setTextSize(fontSize);
 	}
 	if (switchTo == 0) {
 		mTextView1.setText(String.valueOf(mCount));
@@ -229,6 +226,13 @@ private Animation outToRighttAnimation() {
 	outtoRight.setInterpolator(new LinearInterpolator());
 	return outtoRight;
 }
+
+public void setActivityBackgroundColor() {
+
+	View myV = this.getWindow().findViewById(R.id.view_flipper);
+	myV.setBackgroundColor(mPref.getColor(mContext));
+}
+
 private void log(String msg) {
 	try {
 		Thread.sleep(500);

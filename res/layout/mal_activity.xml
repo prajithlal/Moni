@@ -2,7 +2,7 @@
     android:id="@+id/view_flipper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF0000"
+    android:background="#660000"
     android:orientation="vertical" >
 
     <include

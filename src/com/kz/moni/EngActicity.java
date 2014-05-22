@@ -64,7 +64,7 @@ public class EngActicity extends Activity {
 
 		mPref = new MoniPreferences();
 		isMute = mPref.getMoniPreference(mContext, MoniConstants.MUTE_FLAG);
-        
+
 		mCurrentLayoutState = 0;
 
 		mFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
@@ -148,7 +148,7 @@ public class EngActicity extends Activity {
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log("IOE"+e);
 		}
 		
 	}
@@ -247,37 +247,8 @@ public class EngActicity extends Activity {
 	
 	public void setActivityBackgroundColor() {
 
-		Random r = new Random();
-		int clr = r.nextInt(8 - 1) + 1;
-
 		View myV = this.getWindow().findViewById(R.id.view_flipper);
-		
-		switch(clr){
-		
-			case 1:
-				myV.setBackgroundColor(getResources().getColor(R.color.bg1));
-				break;
-			case 2:
-				myV.setBackgroundColor(getResources().getColor(R.color.bg2));
-				break;
-			case 3:
-				myV.setBackgroundColor(getResources().getColor(R.color.bg3));
-				break;
-			case 4:
-				myV.setBackgroundColor(getResources().getColor(R.color.bg4));
-				break;
-			case 5:
-				myV.setBackgroundColor(getResources().getColor(R.color.bg5));
-				break;
-			case 6:
-				myV.setBackgroundColor(getResources().getColor(R.color.bg6));
-				break;
-			case 7:
-				myV.setBackgroundColor(getResources().getColor(R.color.bg7));
-				break;
-
-		}
-
+		myV.setBackgroundColor(mPref.getColor(mContext));
 	}
 	
 	private void log(String msg) {

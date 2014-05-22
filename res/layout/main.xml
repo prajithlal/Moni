@@ -19,19 +19,7 @@
             android:contentDescription="@string/btnEng"
             android:scaleType="fitStart"
             android:src="@drawable/ic_launcher" />
-		<ImageView
-            android:id="@+id/imgSnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:adjustViewBounds="true"
-            android:layout_toRightOf="@id/imgDra"
-            android:paddingLeft="50dp"
-            android:clickable="true"
-            android:contentDescription="@string/imgSound"
-            android:scaleType="fitCenter"
-            android:src="@drawable/sound_on" />
-    	    	    
+   	    
 
 
 	    
@@ -45,7 +33,6 @@
             android:contentDescription="@string/btnEng"
             android:layout_toRightOf="@id/imgDra"
             android:paddingBottom="30dp"
-			android:layout_below="@id/imgSnd"
             android:scaleType="fitCenter"
             android:src="@drawable/abc" />
 	   
@@ -74,6 +61,19 @@
 			android:paddingBottom="30dp"
             android:scaleType="fitCenter"
             android:src="@drawable/num" />
+	    
+	    <ImageView
+            android:id="@+id/imgSnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:adjustViewBounds="true"
+            android:layout_alignBottom="@id/imgDra"
+            android:paddingLeft="5dp"
+            android:clickable="true"
+            android:contentDescription="@string/imgSound"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sound_on" />
 	    	    
 </RelativeLayout>
 

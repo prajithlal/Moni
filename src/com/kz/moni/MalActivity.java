@@ -13,12 +13,14 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.kz.moni.MoniPreferences.MoniConstants;
 import com.kz.moni.util.SystemUiHider;
 
 /**
@@ -41,6 +43,8 @@ public class MalActivity extends Activity {
 	// Audio volume
 	private float mStreamVolume;
 	Context mContext = this;
+	
+	private MoniPreferences mPref;
 	
 	private String[] malAlph = {"A", "B","C", "Cu", "D", "Du", "E", "F", "G", "sF", "H", "Hm", "Hu", "Aw", "Ax", 
 			"I", "J", "K", "L", "M",
@@ -67,11 +71,10 @@ public class MalActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.mal_activity);
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
-        
-        isMute = pref.getBoolean("isMute", false);
+		mPref = new MoniPreferences();
+		isMute = mPref.getMoniPreference(mContext, MoniConstants.MUTE_FLAG);
+		
         log("Sound mute status is " + isMute);
-        log ("Letter size " + malAlph.length + "Sound len " + malSound.length);
         
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		mCurrentLayoutState = 0;
@@ -154,7 +157,7 @@ public class MalActivity extends Activity {
 	
 	public void switchLayoutStateTo(int switchTo) {
 		mCurrentLayoutState = switchTo;
-
+        setActivityBackgroundColor();
 		if (isRight) {
 
 			mFlipper.setInAnimation(inFromLefttAnimation());
@@ -221,6 +224,12 @@ public class MalActivity extends Activity {
 		outtoRight.setDuration(500);
 		outtoRight.setInterpolator(new LinearInterpolator());
 		return outtoRight;
+	}
+	
+	public void setActivityBackgroundColor() {
+
+		View myV = this.getWindow().findViewById(R.id.view_flipper);
+		myV.setBackgroundColor(mPref.getColor(mContext));
 	}
 
 	private void log(String msg) {
